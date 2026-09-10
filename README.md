@@ -9,6 +9,8 @@ Two tracks:
 - **Basics** (`/basics`) — variables, control structures, loops, arrays, sets
 - **Patterns** (`/problems`) — named patterns, starting with accumulator / Running Total
 
+![Workspace for Running Total in Python, with visible tests, Monaco editor, and Try / Run tests / Submit](docs/images/workspace.jpg)
+
 Canonical spec: [docs/PRD.md](docs/PRD.md) · Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · Plan: [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md)
 
 ## Stack
