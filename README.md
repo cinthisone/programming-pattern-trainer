@@ -17,7 +17,7 @@ Canonical spec: [docs/PRD.md](docs/PRD.md) · Architecture: [docs/ARCHITECTURE.m
 
 Next.js 16 App Router, React 19, TypeScript, Tailwind v4, shadcn/ui, Monaco, Zod, Vitest. Supabase is planned for auth and progress.
 
-Code never runs in the browser or on Vercel. The app talks to **[Judge0](https://ce.judge0.com/)**: this project uses a **self-hosted Judge0 CE** instance. To run Try / Run tests / Submit yourself, either [self-host Judge0 CE](https://github.com/judge0/judge0/blob/master/CHANGELOG.md) on your own VPS or subscribe to a [hosted Judge0 plan](https://ce.judge0.com/) and point the app at that API.
+Code never runs in the browser or on Vercel. The app talks to **[Judge0](https://ce.judge0.com/)**. This project uses a **self-hosted Judge0 CE** instance. If you want to run code yourself, [self-host Judge0](https://github.com/judge0/judge0/releases/tag/v1.13.1) on a VPS or [subscribe to hosted Judge0](https://ce.judge0.com/) and connect with `JUDGE0_BASE_URL` and `JUDGE0_API_KEY`.
 
 ## Run locally
 
