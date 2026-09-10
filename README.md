@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pattern Trainer
 
-## Getting Started
+Learn **programming patterns**, not a language in isolation.
 
-First, run the development server:
+A problem is the same idea in every language. You write it in Monaco, run it against stdin/stdout tests, then solve it again in Python, JavaScript, TypeScript, C, Go, or PHP.
+
+Two tracks:
+
+- **Basics** (`/basics`) — variables, control structures, loops, arrays, sets
+- **Patterns** (`/problems`) — named patterns, starting with accumulator / Running Total
+
+Canonical spec: [docs/PRD.md](docs/PRD.md) · Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · Plan: [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md)
+
+## Stack
+
+Next.js 16 App Router, React 19, TypeScript, Tailwind v4, shadcn/ui, Monaco, Zod, Vitest. Supabase is planned for auth and progress. Code execution is **Judge0 CE** on a dedicated box — never on Vercel, never in the browser.
+
+## Run locally
 
 ```bash
+cp .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Auth is off by default (`AUTH_DISABLED=true`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Run / Submit / Try
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Code runs through Judge0. If your Judge0 API is only on the sandbox host’s localhost, keep a tunnel open in a second terminal while you train:
 
-## Learn More
+```bash
+ssh -N judge0-tunnel
+```
 
-To learn more about Next.js, take a look at the following resources:
+Then in `.env.local`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+JUDGE0_BASE_URL=http://127.0.0.1:2358
+JUDGE0_API_KEY=           # X-Auth-Token from the Judge0 host
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Try** — your stdin, no grading
+- **Run tests** — visible official cases
+- **Submit** — includes hidden tests (input not shown)
 
-## Deploy on Vercel
+Do not commit `.env.local`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run lint
+npm run typecheck
+npm test
+```
+
+## Later
+
+To turn auth on: set `AUTH_DISABLED=false`, fill the Supabase variables, apply `supabase/migrations`, then promote an admin:
+
+```sql
+update public.profiles set role = 'admin' where id = '<user-uuid>';
+```

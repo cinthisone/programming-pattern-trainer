@@ -955,10 +955,13 @@ JUDGE0_API_KEY=
 AI_GATEWAY_API_KEY=          # or provider-specific
 AI_MODEL=
 
+AUTH_DISABLED=true           # default on when Supabase keys are absent
 ALLOW_GUEST_EXECUTION=false
 MAX_SOURCE_CHARS=65536
 MAX_TIMEOUT_MS=8000
 ```
+
+When `AUTH_DISABLED=true`, or when it is unset and Supabase is not configured, the app runs in local mode: no sign-in, a synthetic user, and admin routes are reachable. Turn this off before a public deployment that should require accounts.
 
 Never prefix secrets with `NEXT_PUBLIC_`.
 
